@@ -1,0 +1,8 @@
+---
+applications:
+- path: ./employee-producer/target/employee-producer-0.0.1-SNAPSHOT.jar
+  name: employee-producer-0.0.1-SNAPSHOT
+  buildpack: java_buildpack
+  memory: 250M
+  instances: 1
+  random-route: true
