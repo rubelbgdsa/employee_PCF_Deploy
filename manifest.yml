@@ -1,8 +1,22 @@
----
-applications:
-- path: ./employee-producer/target/employee-producer-0.0.1-SNAPSHOT.jar
-  name: node-hello
-  buildpack: java_buildpack
-  memory: 250M
-  instances: 1
-  route: rubel-scp-pdv.mybluemix.net
+# Set the path to the build version file
+$BUILD_VERSION_FILE = "build_version.txt"
+
+# Check if the file exists
+if (Test-Path $BUILD_VERSION_FILE) {
+    # Read the build version number from the file
+    $BUILD_VERSION = Get-Content -Path $BUILD_VERSION_FILE
+}
+else {
+    # The file doesn't exist, create it and set its content to "0"
+    New-Item -ItemType File -Path $BUILD_VERSION_FILE
+    $BUILD_VERSION = 0
+}
+
+# Increment the build version number by 1
+$BUILD_VERSION = $BUILD_VERSION + 1
+
+# Save the updated build version number to the file
+$BUILD_VERSION | Set-Content -Path $BUILD_VERSION_FILE
+
+# Print the build version number to the console
+Write-Host "Build version: $BUILD_VERSION"
